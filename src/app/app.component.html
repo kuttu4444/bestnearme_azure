@@ -1,0 +1,162 @@
+
+<div class="container-sm" style="width: fit-content;">
+  <label for="StateDataList" class="form-label">State</label>
+  <div class="ng-autocomplete">
+    <ng-autocomplete [data]="States" [ngClass]="{'typing-placeholder': !StatesearchText}" [searchKeyword]="keyword" placeholder="Search for State" [itemTemplate]="StateitemTemplate"
+      (selected)='StateSelected($event)' [notFoundTemplate]="StatenotFoundTemplate" [(ngModel)]="StatesearchText" (inputChanged)='valueAvailable("State",StatesearchText)' (ngModelChange)='valueAvailable("State",StatesearchText)'>
+    </ng-autocomplete>
+
+    <ng-template #StateitemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #StatenotFoundTemplate let-notFound>
+      Not in the List..Lets Save It:<button *ngIf="StatesSave" mat-icon-button color="warn" (click)="SaveState(StatesearchText)" aria-label="Example icon button with a heart icon" class="animate__animated animate__heartBeat animate__slower	3s animate__infinite	infinite">
+        <mat-icon>save</mat-icon>
+      </button> 
+    </ng-template>
+  </div>
+
+  <label for="DistrictDataList" class="form-label">District</label>
+  
+  <div class="ng-autocomplete">
+    <ng-autocomplete [data]="Districts" [searchKeyword]="keyword" placeholder="Search for District" [itemTemplate]="DistrictitemTemplate"
+      (selected)='DistrictSelected($event)' [notFoundTemplate]="DistrictnotFoundTemplate" [(ngModel)]="DistrictsearchText" (inputChanged)='valueAvailable("District",DistrictsearchText)' (ngModelChange)='valueAvailable("District",DistrictsearchText)'>
+    </ng-autocomplete>
+
+    <ng-template #DistrictitemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #DistrictnotFoundTemplate let-notFound>
+      Not in the List..Lets Save It:<button *ngIf="DistrictsSave" mat-icon-button color="warn" (click)="SaveDistrict(StatesearchText,DistrictsearchText)"
+      aria-label="Example icon button with a heart icon"
+      class="animate__animated animate__heartBeat animate__slower	3s animate__infinite	infinite">
+      <mat-icon>save</mat-icon>
+    </button>
+    </ng-template>
+  </div>
+
+
+  <label for="PlaceDataList" class="form-label">Place</label>
+  <div class="ng-autocomplete">
+    <ng-autocomplete [data]="Places" [searchKeyword]="keyword" placeholder="Search for Places" [itemTemplate]="PlaceitemTemplate"
+      (selected)='PlaceSelected($event)' [notFoundTemplate]="PlacenotFoundTemplate" [(ngModel)]="PlacesearchText" (inputChanged)='valueAvailable("Place",PlacesearchText)' (ngModelChange)='valueAvailable("Place",PlacesearchText)'>
+    </ng-autocomplete>
+
+    <ng-template #PlaceitemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #PlacenotFoundTemplate let-notFound>
+      Not in the List..Lets Save It:<button  mat-icon-button color="warn"
+    (click)="SavePlace(StatesearchText,DistrictsearchText,PlacesearchText)"
+    aria-label="Example icon button with a heart icon"
+    class="animate__animated animate__heartBeat animate__slower	3s animate__infinite	infinite">
+    <mat-icon>save</mat-icon>
+  </button>
+    </ng-template>
+  </div>
+
+
+  <label for="AreaDataList" class="form-label">Area</label>
+  
+  <div class="ng-autocomplete">
+    <ng-autocomplete [data]="Area" [searchKeyword]="keyword" placeholder="Search for Area" [itemTemplate]="AreaitemTemplate"
+      (selected)='AreaSelected($event)' [notFoundTemplate]="AreanotFoundTemplate" [(ngModel)]="AreasearchText" (ngModelChange)="valueAvailable('Area',AreasearchText)" (inputChanged)='valueAvailable("Area",AreasearchText)'>
+    </ng-autocomplete>
+
+    <ng-template #AreaitemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #AreanotFoundTemplate let-notFound>
+      Not in the List..Lets Save It:<button *ngIf="AreaSave" mat-icon-button color="warn"
+    (click)="SaveArea(StatesearchText,DistrictsearchText,PlacesearchText,AreasearchText)"
+    aria-label="Example icon button with a heart icon"
+    class="animate__animated animate__heartBeat animate__slower	3s animate__infinite	infinite">
+    <mat-icon>save</mat-icon>
+  </button>
+    </ng-template>
+  </div>
+
+
+  <label for="TypeDataList" class="form-label">Category in which you want to search Best</label>
+  
+  <div class="ng-autocomplete">
+    <ng-autocomplete [data]="Types" [searchKeyword]="keyword" placeholder="Search for Category" [itemTemplate]="TypesitemTemplate"
+      (selected)='TypeSelected($event)' [notFoundTemplate]="TypesnotFoundTemplate" [(ngModel)]="TypesearchText" (ngModelChange)="valueAvailable('Type',TypesearchText)" (inputChanged)='valueAvailable("Type",TypesearchText)'>
+    </ng-autocomplete>
+
+    <ng-template #TypesitemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #TypesnotFoundTemplate let-notFound>
+      Not in the List..Lets Save It:<button *ngIf="TypesSave" mat-icon-button color="warn"
+      (click)="SaveType(StatesearchText,DistrictsearchText,PlacesearchText,AreasearchText,TypesearchText)"
+      aria-label="Example icon button with a heart icon"
+      class="animate__animated animate__heartBeat animate__slower	3s animate__infinite	infinite">
+      <mat-icon>save</mat-icon>
+    </button>
+    </ng-template>
+  </div>
+
+    <ul class="list-group list-group-flush">
+      <h1 style="text-align: center;">
+        <p><em>Best</em></p>
+      </h1>
+      <div>
+        <input class="form-control" [(ngModel)]="BestsearchText" (keyup)="valueAvailable('Best',BestsearchText)"
+          list="BestlistOptions" id="BestDataList" placeholder="Search for Best...">
+        <button *ngIf="BestSave" mat-icon-button color="warn"
+          (click)="SaveBestNew(BestsearchText,StatesearchText,DistrictsearchText,PlacesearchText,AreasearchText,TypesearchText)"
+          aria-label="Example icon button with a heart icon">
+         Didn't find your prefered Best.Click to Add Up the List and Vote <mat-icon>save</mat-icon>
+        </button>
+      </div>
+      <ng-container *ngFor="let item of BestData| filter : BestsearchText; let rank=index" style="text-align: center;">
+      <li class="list-group-item" *ngIf="rank===0 && !BestsearchText">
+        Ranked # {{rank +1}} {{item.name}} is Top Rated in {{item.Type}} with Total votes of <span class="badge bg-primary rounded-pill">{{item.votes}}</span>
+          Tap to Vote<button mat-icon-button color="warn" (click)="SaveBestVoted(item.name,item.votes)"
+            aria-label="Example icon button with a heart icon"
+            class="animate__animated animate__heartBeat animate__slower	3s animate__infinite	infinite">
+            <mat-icon>favorite</mat-icon>
+          </button>
+      </li>
+      <li class="list-group-item" *ngIf="rank===1 && !BestsearchText">
+        Ranked # {{rank +1}} {{item.name}} is Second Most Rated in {{item.Type}} with Total votes of <span class="badge bg-primary rounded-pill">{{item.votes}}</span>
+        Tap to Vote<button mat-icon-button color="warn" (click)="SaveBestVoted(item.name,item.votes)"
+        aria-label="Example icon button with a heart icon"
+        class="animate__animated animate__heartBeat animate__slower	3s animate__infinite	infinite">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      </li>
+      <li class="list-group-item" *ngIf="rank===2 && !BestsearchText">
+        Ranked # {{rank +1}} {{item.name}} is Third Most Rated in {{item.Type}} with Total votes of <span class="badge bg-primary rounded-pill">{{item.votes}}</span>
+        Tap to Vote<button mat-icon-button color="warn" (click)="SaveBestVoted(item.name,item.votes)"
+        aria-label="Example icon button with a heart icon"
+        class="animate__animated animate__heartBeat animate__slower	3s animate__infinite	infinite">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      </li>
+      <li class="list-group-item" *ngIf="rank>2 && !BestsearchText">
+        Ranked # {{rank +1}} {{item.name}} is  Rated in {{item.Type}} with Total votes of <span class="badge bg-primary rounded-pill">{{item.votes}}</span>
+        Tap to Vote<button mat-icon-button color="warn" (click)="SaveBestVoted(item.name,item.votes)"
+        aria-label="Example icon button with a heart icon"
+        class="animate__animated animate__heartBeat animate__slower	3s animate__infinite	infinite">
+        <mat-icon>favorite</mat-icon>
+      </button>  
+      </li>
+      <li class="list-group-item" *ngIf="BestsearchText">
+        {{item.name}} is  Rated in {{item.Type}} with Total votes of <span class="badge bg-primary rounded-pill">{{item.votes}}</span>
+        Tap to Vote<button mat-icon-button color="warn" (click)="SaveBestVoted(item.name,item.votes)"
+        aria-label="Example icon button with a heart icon"
+        class="animate__animated animate__heartBeat animate__slower	3s animate__infinite	infinite">
+        <mat-icon>favorite</mat-icon>
+      </button>  
+      </li>
+    </ng-container>
+    </ul>
+
+</div>

@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: transparent;  }
+.e-ddl.e-input-group.e-control-wrapper .e-input {
+  font-size: 20px;
+  font-family: emoji;
+  color: #ab3243;
+  background: #32a5ab;
+}
+
+.ng-autocomplete
+{
+  width: 70vw !important;
+}
+
+li:hover {
+  background-color: #ddd;
+}
+
+li.voted {
+  background-color: green;
+}
+
+@keyframes type-placeholder {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.typing-placeholder {
+  overflow: hidden;
+  white-space: nowrap;
+  animation-name: type-placeholder;
+  animation-duration: 1s;
+  animation-timing-function: steps(20, end);
+  animation-fill-mode: forwards;
+}
+/* @keyframes fly-1 {
+    from {
+      transform: translateY(0.1em);
+    }
+  
+    to {
+      transform: translateY(-0.1em);
+    }
+  }
+
+  a:hover {
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+  }
+  a span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+  } */
